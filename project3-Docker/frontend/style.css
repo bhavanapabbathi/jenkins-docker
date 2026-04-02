@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.task-item {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border-left: 4px solid #4CAF50;
+}
+
+.task-item h3 {
+    color: #333;
+}
+
+.task-item p {
+    color: #666;
+    font-size: 13px;
+}
+
+.status-pending { border-left-color: #ff9800; }
+.status-in_progress { border-left-color: #2196F3; }
+.status-done { border-left-color: #4CAF50; }
+
+.delete-btn {
+    background: #f44336;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.delete-btn:hover {
+    background: #d32f2f;
+}
+
+p {
+    margin-top: 8px;
+    color: green;
+    font-size: 13px;
+}

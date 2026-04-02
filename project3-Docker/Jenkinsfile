@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        ECR_REGISTRY = '727663801929.dkr.ecr.us-east-1.amazonaws.com'
+        ECR_REPO = 'docker'
+        IMAGE_TAG = 'latest'
+        ECS_CLUSTER = 'docker'
+        ECS_SERVICE = 'docker-service'
+    }
+
+    stages {
+
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image...'
+                sh '''
+                    cd /home/ec2-user/docker
+                    sudo docker build -t $ECR_REPO:$IMAGE_TAG ./backend
+                '''
+            }
+        }
+
+        stage('Push to ECR') {
+            steps {
+                echo 'Pushing image to ECR...'
+                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
+                    sh '''
+                        aws ecr get-login-password --region $AWS_REGION | sudo docker login --username AWS --password-stdin $ECR_REGISTRY
+                        sudo docker tag $ECR_REPO:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
+                        sudo docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to ECS') {
+            steps {
+                echo 'Deploying to ECS...'
+                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
+                    sh '''
+                        aws ecs update-service \
+                            --cluster $ECS_CLUSTER \
+                            --service $ECS_SERVICE \
+                            --force-new-deployment \
+                            --region $AWS_REGION
+                    '''
+                }
+            }
+        }
+    }

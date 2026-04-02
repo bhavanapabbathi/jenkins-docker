@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Task Manager</h1>
+
+        <!-- Register Section -->
+        <div class="card">
+            <h2>Register User</h2>
+            <input type="text" id="reg-username" placeholder="Username" />
+            <input type="email" id="reg-email" placeholder="Email" />
+            <input type="password" id="reg-password" placeholder="Password" />
+            <button onclick="registerUser()">Register</button>
+            <p id="reg-msg"></p>
+        </div>
+
+        <!-- Add Task Section -->
+        <div class="card">
+            <h2>Add Task</h2>
+            <input type="text" id="task-title" placeholder="Task Title" />
+            <input type="text" id="task-desc" placeholder="Task Description" />
+            <select id="task-status">
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="done">Done</option>
+            </select>
+            <input type="number" id="task-owner" placeholder="User ID" />
+            <button onclick="addTask()">Add Task</button>
+            <p id="task-msg"></p>
+        </div>
+
+        <!-- Task List Section -->
+        <div class="card">
+            <h2>All Tasks</h2>
+            <button onclick="loadTasks()">Refresh Tasks</button>
+            <div id="task-list"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
